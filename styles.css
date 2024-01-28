@@ -15,7 +15,8 @@ html, body{
 }
 .content-wrapper{
     border: 1px solid black;
-    width: 40%;
+    /* width: 40%; */
+    min-width: 100%;
     flex: 1;
     display: flex;
     justify-content: center;
