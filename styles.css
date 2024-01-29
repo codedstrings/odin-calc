@@ -1,7 +1,9 @@
 *{
     box-sizing: border-box;
     margin: 0;
-    text-align: center;
+    /* text-align: center; */
+    /* border: 1px solid black;
+    border-radius: inherit;   */
 }
 html, body{
     height:100% 
@@ -14,14 +16,43 @@ html, body{
     min-height: 100vh;
 }
 .content-wrapper{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     /* width: 40%; */
     min-width: 100%;
     flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center ;
+    padding: 15px 0;
 }
+.calculator{
+    border: 1px solid black;
+    border-radius: 15px;
+    min-width: 440px;
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.display{
+    border: inherit;
+    text-align: right;
+    border-radius: inherit;
+    height: 125px;
+    display: flex;
+    flex-direction: column  ;
+/* keep diplay text bottom-aligned */
+    justify-content: flex-end;
+}
+.controls{
+    border: inherit ;
+    border-radius: inherit;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 header,footer{
     min-height: 55px;
     display: flex;
