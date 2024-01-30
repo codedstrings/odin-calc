@@ -55,7 +55,7 @@ html, body{
     justify-content: flex-end;
     padding: 0 15px;
 }
-.result-display{
+.large-display{
     font-size: 3em;
 }
 .controls{
@@ -85,11 +85,14 @@ border-radius: inherit;
 .equals{
     flex: 2 1 42px;
 }
+
+/* colors and appearance */
 button{
 border: 1px solid black;
 border-radius: inherit;
 cursor: pointer;
 }
+
 .color1{
     color: var(--operator-text);
     font-size: large;
@@ -105,6 +108,8 @@ cursor: pointer;
     background-color: var(--background-blue);
     font-size: large;
 }
+
+/* header and footer */
 header,footer{
     min-height: 55px;
     display: flex;
