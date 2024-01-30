@@ -70,6 +70,7 @@ function numberClick() {
   }
   else if(operandCount==1){
     num2=displayVal;
+    operandCount=2;
   }
 
   console.log("displayval:",displayVal," num1,num2: ",num1,num2)
@@ -82,9 +83,10 @@ function operatorClick() {
   if(operandCount==0){
     operandCount=1;
   }
-  else if(operandCount==1){
+  else if(operandCount==2){
     num1=operate(num1,num2,operator);
     num2=0;
+    operandCount=1;
   }
   operator=this.value;
   largeDisplay.innerText=operator;
