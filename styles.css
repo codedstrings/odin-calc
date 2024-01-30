@@ -54,9 +54,13 @@ html, body{
 /* keep diplay text bottom-aligned */
     justify-content: flex-end;
     padding: 0 15px;
+    /* gap: 2px; */
 }
 .large-display{
     font-size: 3em;
+}
+.small-display{
+    font-size: 2em;
 }
 .controls{
     border: inherit ;
