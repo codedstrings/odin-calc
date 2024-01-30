@@ -71,11 +71,11 @@ gap: 10px;
 .color1{
     color: var(--operator-text);
 }
-.ac,.clear{
+.ac,.backspace{
     flex: 1 1 64px;
 }
 .equals{
-    flex: 2 1 38px;
+    flex: 2 1 42px;
 }
 
 header,footer{
