@@ -1,3 +1,6 @@
+:root{
+    --operator-text: #ff0000;
+}
 *{
     box-sizing: border-box;
     margin: 0;
@@ -34,6 +37,7 @@ html, body{
     padding: 15px;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 .display{
     border: inherit;
@@ -51,6 +55,27 @@ html, body{
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    /* padding: 15px 0 0 0; */
+    padding: 10px;
+}
+.row{
+display: flex;
+flex: 1;
+gap: 10px;
+}
+.number,.operator{
+    /* flex: auto; */
+    flex: 1;
+}
+.color1{
+    color: var(--operator-text);
+}
+.ac,.clear{
+    flex: 1 1 64px;
+}
+.equals{
+    flex: 2 1 38px;
 }
 
 header,footer{
