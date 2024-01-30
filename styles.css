@@ -1,5 +1,8 @@
 :root{
     --operator-text: #ff0000;
+    --background-blue: #bcbcff;
+    --backspace-background: #b5b3ff;
+    --calculatorclr: #9c9696;
 }
 *{
     box-sizing: border-box;
@@ -37,7 +40,8 @@ html, body{
     padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 25px;
+    background-color: var(--calculatorclr);
 }
 .display{
     border: inherit;
@@ -46,8 +50,13 @@ html, body{
     height: 125px;
     display: flex;
     flex-direction: column  ;
+    background-color: buttonface;
 /* keep diplay text bottom-aligned */
     justify-content: flex-end;
+    padding: 0 15px;
+}
+.result-display{
+    font-size: 3em;
 }
 .controls{
     border: inherit ;
@@ -63,21 +72,39 @@ html, body{
 display: flex;
 flex: 1;
 gap: 10px;
+border-radius: inherit;
 }
 .number,.operator{
     /* flex: auto; */
     flex: 1;
 }
-.color1{
-    color: var(--operator-text);
-}
+
 .ac,.backspace{
     flex: 1 1 64px;
 }
 .equals{
     flex: 2 1 42px;
 }
-
+button{
+border: 1px solid black;
+border-radius: inherit;
+cursor: pointer;
+}
+.color1{
+    color: var(--operator-text);
+    font-size: large;
+    font-weight: 600;
+    background: #ffc3c3;
+}
+.ac{
+    background-color: var(--background-blue);
+    color: red;
+    font-size: large;
+}
+.backspace{
+    background-color: var(--background-blue);
+    font-size: large;
+}
 header,footer{
     min-height: 55px;
     display: flex;
