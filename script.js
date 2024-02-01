@@ -87,6 +87,7 @@ function operatorClick() {
   }
   operator = this.value;
   largeDisplay.innerText = operator;
+  smallDisplay.innerText=num1+" "+operator;
   displayVal = "";
 
   console.log("displayval:", displayVal, " num1,num2: ", num1, num2);
