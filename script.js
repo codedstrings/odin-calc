@@ -81,7 +81,7 @@ function numberClick() {
   if (operandCount == 0) {
     //first time number is entered
     num1 = displayVal;
-  } else if (operandCount == 1) {
+  } else if (operandCount == 1||operandCount==2) {
     // number clicked after an operator is clicked. ie. num1 exists
     num2 = displayVal;
     operandCount = 2;
