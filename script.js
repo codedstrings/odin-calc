@@ -158,7 +158,18 @@ function equalsHandler() {
     console.log("equals; ", calc);
     smallDisplay.innerText = num1 + " " + operator + " " + num2 + " = ";
     largeDisplay.innerText = calc;
-    //displayVal set to calc so it can be used as num1 again.
-    displayVal = calc;
+
+    //check zerroError to keep zerroError working normally
+    if(!zerroError){
+
+      //operandcount=0 so numberclick works normally after equals.
+      operandCount=0;
+      //displayVal=calc so it can be used for num1 concatination on numclick
+      displayVal = calc; 
+      //num1=calc so operatorclick works normally after equals.
+      num1=calc;
+
+    }
+    
   }
 }
