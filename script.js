@@ -2,6 +2,7 @@
 let num1 = 0;
 let num2 = 0;
 let operator;
+let zerroError=false;
 let displayVal = "";
 let operandCount = 0; //to know when pairs are created
 let largeDisplay = document.querySelector(".large-display");
@@ -47,6 +48,12 @@ const subtract = function (num1, num2) {
 };
 
 const divide = function (num1, num2) {
+  if(num2==0){
+    // zeroErrorHandler();
+    // clearFunc();
+    zerroError=true;
+    return "ERROR";
+  }
   return num1 / num2;
 };
 
@@ -62,6 +69,10 @@ equals.addEventListener("click", equalsHandler);
 function numberClick() {
   console.log("\nNumberclick()");
 
+  if(zerroError){
+    console.log("zerroError")
+    return
+  }
   displayVal = displayVal + this.value;
   largeDisplay.innerText = displayVal;
   if (operandCount == 0) {
@@ -81,10 +92,23 @@ function operatorClick() {
   if (operandCount == 0) {
     operandCount = 1;
   } else if (operandCount == 2) {
-    num1 = operate(num1, num2, operator);
-    num2 = 0;
-    operandCount = 1;
+    let tempReturn=operate(num1,num2,operator)
+    if(zerroError){
+      console.log("zerro error");
+      // smallDisplay.innerText=
+      // largeDisplay.innerText=tempReturn;
+      equalsHandler();
+      return 
+    }
+    else{
+      num1 = tempReturn;
+      num2 = 0;
+      operandCount = 1;
+    }
+   
   }
+
+
   operator = this.value;
   largeDisplay.innerText = operator;
   smallDisplay.innerText=num1+" "+operator;
@@ -98,6 +122,7 @@ function operatorClick() {
 function clearFunc() {
   smallDisplay.innerText = "";
   largeDisplay.innerText = 0;
+  zerroError=false;
   num1 = 0;
   num2 = 0;
   displayVal = "";
@@ -115,6 +140,7 @@ function clearFunc() {
 
 //equals
 function equalsHandler() {
+  console.log("EqualsHandler")
   if (operandCount == 2) {
     let calc = operate(num1, num2, operator);
     console.log("equals; ", calc);
@@ -122,4 +148,13 @@ function equalsHandler() {
     largeDisplay.innerText = calc;
     displayVal=calc;
   }
+}
+function zeroErrorHandler(){
+  numberBtns.forEach((number) => {
+    number.removeEventListener("click", numberClick);
+  });
+  operatorBtns.forEach((operator) => {
+    operator.removeEventListener("click", operatorClick);
+  });
+  equals.removeEventListener("click", equalsHandler);
 }
