@@ -78,9 +78,11 @@ flex: 1;
 gap: 10px;
 border-radius: inherit;
 }
-.number,.operator{
+.number,.operator,.decimal{
     /* flex: auto; */
     flex: 1;
+    font-size: large;
+    font-weight: 400;
 }
 
 .ac,.backspace{
@@ -97,10 +99,10 @@ border-radius: inherit;
 cursor: pointer;
 }
 
-.color1{
+
+.operator{
     color: var(--operator-text);
-    font-size: large;
-    font-weight: 600;
+   
     background: #ffc3c3;
 }
 .ac{
