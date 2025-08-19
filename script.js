@@ -10,7 +10,8 @@ let smallDisplay = document.querySelector(".small-display");
 let numberBtns = document.querySelectorAll(".number");
 let operatorBtns = document.querySelectorAll(".operator");
 let equals = document.querySelector(".equals");
-let acBtn=document.querySelector(".ac");
+let acBtn = document.querySelector(".ac");
+let decimalBtn = document.querySelector(".decimal");
 
 function operate(num1, num2, operator) {
   num1 = Number(num1);
@@ -63,7 +64,8 @@ operatorBtns.forEach((operator) => {
   operator.addEventListener("click", operatorClick);
 });
 equals.addEventListener("click", equalsHandler);
-acBtn.addEventListener("click",clearFunc);
+acBtn.addEventListener("click", clearFunc);
+decimalBtn.addEventListener("click", decimalClick);
 
 function numberClick() {
   console.log("\nNumberclick()");
@@ -73,15 +75,24 @@ function numberClick() {
     return;
   }
 
-  //displayVal used to concatenate all num entries and make a single number
-  displayVal = displayVal + this.value;
+  //FCC User Story #10: Prevent multiple leading zeros
+  if (displayVal === "0" && this.value === "0") {
+    return; // Don't allow multiple zeros at start
+  }
+  
+  // If current display is "0", replace it with the new number (unless it's a decimal)
+  if (displayVal === "0" && this.value !== "0") {
+    displayVal = this.value;
+  } else {
+    displayVal = displayVal + this.value;
+  }
 
-  //dipslay current pressed
+  //display current pressed
   largeDisplay.innerText = displayVal;
   if (operandCount == 0) {
     //first time number is entered
     num1 = displayVal;
-  } else if (operandCount == 1||operandCount==2) {
+  } else if (operandCount == 1 || operandCount == 2) {
     // number clicked after an operator is clicked. ie. num1 exists
     num2 = displayVal;
     operandCount = 2;
@@ -91,16 +102,63 @@ function numberClick() {
   console.log("operator,operandcount: ", operator, operandCount);
 }
 
+function decimalClick() {
+  console.log("\nDecimalclick()");
+  
+  if (zerroError) {
+    return;
+  }
+  
+  // FCC User Story #11: Don't allow multiple decimals in one number
+  if (displayVal.includes(".")) {
+    return;
+  }
+  
+  // If displayVal is empty or just "0", start with "0."
+  if (displayVal === "" || displayVal === "0") {
+    displayVal = "0.";
+  } else {
+    displayVal = displayVal + ".";
+  }
+  
+  largeDisplay.innerText = displayVal;
+  
+  if (operandCount == 0) {
+    num1 = displayVal;
+  } else if (operandCount == 1 || operandCount == 2) {
+    num2 = displayVal;
+    operandCount = 2;
+  }
+  
+  console.log("decimal - displayval:", displayVal, " num1,num2: ", num1, num2);
+}
+
 function operatorClick() {
   console.log("\nOperatorclick()");
 
+  //FCC User Story #13: Handle consecutive operators
+  if (operandCount == 1 && displayVal === "") {
+    // This means an operator was just clicked - replace the previous operator
+    // unless it's a minus sign following another operator (for negative numbers)
+    let prevOperator = operator;
+    if (this.value === "-" && prevOperator !== "-") {
+      // Allow negative numbers: if previous operator wasn't minus, allow this minus
+      displayVal = "-";
+      largeDisplay.innerText = displayVal;
+      return;
+    } else {
+      // Replace the previous operator with this one
+      operator = this.value;
+      largeDisplay.innerText = operator;
+      smallDisplay.innerText = num1 + " " + operator;
+      return;
+    }
+  }
+
   if (operandCount == 0) {
     //for when operator clicked after a number 
-    //click after equals is buggy
     operandCount = 1;
-  } 
-  
-  else if (operandCount == 2) {
+  } else if (operandCount == 2) {
     //when two operands exists
     let tempReturn = operate(num1, num2, operator);
 
@@ -110,8 +168,7 @@ function operatorClick() {
       //equalshandler to print error and show calculation on small display
       equalsHandler();
       return;
-    } 
-    else {
+    } else {
       //set num1 as result, num2 to zero and operandcount=1 to continue operations.
       num1 = tempReturn;
       num2 = 0;
@@ -133,7 +190,7 @@ function operatorClick() {
 function clearFunc() {
   //resets all values, clears small display and print 0 in largedisplay
   smallDisplay.innerText = "";
-  largeDisplay.innerText = 0;
+  largeDisplay.innerText = "0";
   zerroError = false;
   num1 = 0;
   num2 = 0;
@@ -160,16 +217,13 @@ function equalsHandler() {
     largeDisplay.innerText = calc;
 
     //check zerroError to keep zerroError working normally
-    if(!zerroError){
-
+    if (!zerroError) {
       //operandcount=0 so numberclick works normally after equals.
-      operandCount=0;
+      operandCount = 0;
       //displayVal=calc so it can be used for num1 concatination on numclick
-      displayVal = calc; 
+      displayVal = calc.toString(); 
       //num1=calc so operatorclick works normally after equals.
-      num1=calc;
-
+      num1 = calc;
     }
-    
   }
 }
